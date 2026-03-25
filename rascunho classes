@@ -1,0 +1,78 @@
+#funcionalidade 1 - Perfil do usuário
+#funcionalidade 2 - Catálogo de livros
+#funcionalidade 3 - Biblioteca pessoal
+#funcionalidade 4 - Adicionar resenha literária
+#funcionalidade 5 - Categorizar livros
+#funcionalidade 6 - Etiquetar livros
+#funcionalidade 7 - Definir metas literárias
+#funcionalidade 8 - Armazenar datas de início/fim de leituras
+#funcionalidade 9 - Retrospectiva dos livros datados naquele ano
+#funcionalidade 10 - Incentivo de leitura via e-mail
+
+#biblioteca pessoal do usuário
+class Biblioteca:
+    def __init__(self):
+        self.lista_livros = []
+        
+
+    #adicionar livro à biblioteca pessoal do usuário
+    def add_biblioteca():
+        self.livros = Livro()
+
+    #excluir livro da biblioteca pessoal do usuário
+    def delete_biblioteca():
+
+    #criar categoria
+
+    #criar meta (lista de livros)
+
+class Livro:
+    def __init__(self,titulo,autor,inicio_leitura,final_leitura, etiqueta):
+        self.titulo = titulo
+        self.autor = autor
+        self.inicio_leitura = inicio_leitura
+        self.final_leitura = final_leitura
+        self.etiqueta = etiqueta
+
+    #adicionar resenha
+    def escrever_resenha():
+
+
+    #excluir resenha
+
+
+    #adicionar nota
+    def atribuir_nota():
+
+    #excluir nota
+
+
+    #adicionar tag (etiqueta) no livro
+    def atribuir_tag():
+    
+    #excluir tage (etiqueta) no livro
+
+
+
+
+
+#catálogo no menu
+class Catalogo:
+    def __init__(self):
+        self.livros = {}
+
+
+    #filtrar resultados
+    def busca()
+
+
+class Usuario:
+    def __init__(self, nome,email,senha,join_date):
+        self.nome = nome
+        self.email = email
+        self.senha = senha
+        self.join_date = join_date
+        self.biblioteca_pessoal = []
+        
+
+
