@@ -1,5 +1,6 @@
 #INCOMPLETO
 
+
 class Livro:
     def __init__(self,nome,autor,inicio_leitura,final_leitura,etiqueta,nota):
         self.nome = nome
@@ -11,21 +12,22 @@ class Livro:
 
     def adicionar_etiqueta(etiquetas):
         etiqueta = input("Digite a etiqueta que deseja criar: ")
-        etiquetas.append(etiqueta)
 
     def excluir_etiqueta(etiquetas):
-        etiqueta = input("Digite a etiqueta que deseja excluir: ")
-        etiquetas.remove(etiqueta)
+      #  etiqueta = input("Digite a etiqueta que deseja excluir: ")
+      pass
 
     def atribuir_nota(nota):
-        nova_nota = input("Digite sua nota para o livro indicado: ")
+        nova_nota = float(input("Digite sua nota (1 a 5) para o livro indicado: "))
 
     def remover_nota(nota):
+        nova_nota = None
 
     def escrever_resenha():
+        nova_resenha = input("Digite sua resenha literária para o livro indicado: ")
 
     def remover_resenha():
-
+        nova_resenha = None
 
     
 
@@ -63,6 +65,7 @@ class Catalogo:
         self.livros = [] # LISTA DE CLASSE LIVROS DIVERSOS 
 
     def ver_infos(livros):
+        #print({})
         pass
 
     # ADICIONAR NO GERAL, SEM SER EM CATEGORIA
@@ -79,10 +82,21 @@ class Usuario:
     def __init__(self, nome,email,senha,ultimo_acesso):
         self.nome = nome
         self.email = email
-        self.senha = senha
+        self.__senha = senha #dois underlines para proteger o dado sigiloso
         self.ultimo_acesso = ultimo_acesso
         self.biblioteca_pessoal = []
         self.meta_leitura = []
 
+    def cadastro(nome,email,senha):
+        pass
 
 
+
+#teste
+Livro1 = Livro("Romeu e Julieta", "shakespeare","01/04","05/04","Clássicos","4.5")
+ 
+
+if __name__ == "__main__":
+    print("======== My Bookshelf ========")
+
+    
