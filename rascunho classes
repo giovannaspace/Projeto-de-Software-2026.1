@@ -1,78 +1,88 @@
-#funcionalidade 1 - Perfil do usuário
-#funcionalidade 2 - Catálogo de livros
-#funcionalidade 3 - Biblioteca pessoal
-#funcionalidade 4 - Adicionar resenha literária
-#funcionalidade 5 - Categorizar livros
-#funcionalidade 6 - Etiquetar livros
-#funcionalidade 7 - Definir metas literárias
-#funcionalidade 8 - Armazenar datas de início/fim de leituras
-#funcionalidade 9 - Retrospectiva dos livros datados naquele ano
-#funcionalidade 10 - Incentivo de leitura via e-mail
-
-#biblioteca pessoal do usuário
-class Biblioteca:
-    def __init__(self):
-        self.lista_livros = []
-        
-
-    #adicionar livro à biblioteca pessoal do usuário
-    def add_biblioteca():
-        self.livros = Livro()
-
-    #excluir livro da biblioteca pessoal do usuário
-    def delete_biblioteca():
-
-    #criar categoria
-
-    #criar meta (lista de livros)
+#INCOMPLETO
 
 class Livro:
-    def __init__(self,titulo,autor,inicio_leitura,final_leitura, etiqueta):
-        self.titulo = titulo
+    def __init__(self,nome,autor,inicio_leitura,final_leitura,etiqueta,nota):
+        self.nome = nome
         self.autor = autor
         self.inicio_leitura = inicio_leitura
         self.final_leitura = final_leitura
         self.etiqueta = etiqueta
+        self.nota = nota
 
-    #adicionar resenha
+    def adicionar_etiqueta(etiquetas):
+        etiqueta = input("Digite a etiqueta que deseja criar: ")
+        etiquetas.append(etiqueta)
+
+    def excluir_etiqueta(etiquetas):
+        etiqueta = input("Digite a etiqueta que deseja excluir: ")
+        etiquetas.remove(etiqueta)
+
+    def atribuir_nota(nota):
+        nova_nota = input("Digite sua nota para o livro indicado: ")
+
+    def remover_nota(nota):
+
     def escrever_resenha():
 
-
-    #excluir resenha
-
-
-    #adicionar nota
-    def atribuir_nota():
-
-    #excluir nota
+    def remover_resenha():
 
 
-    #adicionar tag (etiqueta) no livro
-    def atribuir_tag():
     
-    #excluir tage (etiqueta) no livro
 
 
+#pastas = categorias
+class Categoria_criada:
+    def __init__(self,nome):
+        self.nome = nome
+        self.livros_add = []
+      
+    # CLASSE LIVROS DENTRO DA CATEGORIA
+    def adicionar_livro(livros_add,livro):
+        livro = Livro()
+        livro.nome = input("Digite o livro que deseja adicionar: ")
+        livros_add.append(livro)
 
 
+class Biblioteca_Pessoal:
+    def __init__(self,total):
+        self.lista_livros = [] #LISTA DE CLASSE LIVROS ADICIONADOS
+        self.lista_categorias = [] #LISTA DE CLASSE CATEGORIAS
 
-#catálogo no menu
+    def adicionar_categoria(lista_categorias,categoria):
+        categoria = Categoria_criada()
+        categoria.nome = input("Digite a categoria que deseja criar: ")
+        lista_categorias.append(categoria)
+
+    def excluir_categoria(lista_categorias,categoria):
+        categoria = input("Digite a categoria que deseja excluir: ")
+        lista_categorias.remove(categoria)
+
+
 class Catalogo:
     def __init__(self):
-        self.livros = {}
+        self.livros = [] # LISTA DE CLASSE LIVROS DIVERSOS 
+
+    def ver_infos(livros):
+        pass
+
+    # ADICIONAR NO GERAL, SEM SER EM CATEGORIA
+    def adicionar_livro(lista_livros,livro):
+        livro = Livro()
+        livro.nome = input("Digite o livro que deseja adicionar na biblioteca: ")
+        lista_livros.append(livro)
 
 
-    #filtrar resultados
-    def busca()
+
 
 
 class Usuario:
-    def __init__(self, nome,email,senha,join_date):
+    def __init__(self, nome,email,senha,ultimo_acesso):
         self.nome = nome
         self.email = email
         self.senha = senha
-        self.join_date = join_date
+        self.ultimo_acesso = ultimo_acesso
         self.biblioteca_pessoal = []
-        
+        self.meta_leitura = []
+
 
 
