@@ -1,5 +1,15 @@
-#INCOMPLETO
+#funcionalidade 1 - Perfil do usuário
+#funcionalidade 2 - Catálogo de livros
+#funcionalidade 3 - Biblioteca pessoal
+#funcionalidade 4 - Adicionar resenha literária
+#funcionalidade 5 - Categorizar livros
+#funcionalidade 6 - Etiquetar livros
+#funcionalidade 7 - Definir metas literárias
+#funcionalidade 8 - Armazenar datas de início/fim de leituras
+#funcionalidade 9 - Retrospectiva dos livros datados naquele ano
+#funcionalidade 10 - Incentivo de leitura via e-mail
 
+# incompleto
 
 class Livro:
     def __init__(self,nome,autor,inicio_leitura,final_leitura,etiqueta,nota):
@@ -12,19 +22,25 @@ class Livro:
 
     def adicionar_etiqueta(etiquetas):
         etiqueta = input("Digite a etiqueta que deseja criar: ")
+        # mostrar etiqueta
+        print("Nova etiqueta: ", etiqueta) 
 
     def excluir_etiqueta(etiquetas):
       #  etiqueta = input("Digite a etiqueta que deseja excluir: ")
-      pass
+        etiqueta = None
 
     def atribuir_nota(nota):
         nova_nota = float(input("Digite sua nota (1 a 5) para o livro indicado: "))
+        # mostrar nota
+        print("Nota: ", nova_nota)
 
     def remover_nota(nota):
         nova_nota = None
 
     def escrever_resenha():
         nova_resenha = input("Digite sua resenha literária para o livro indicado: ")
+        # mostrar resenha literária
+        print("Resenha adicionada: ", nova_resenha)
 
     def remover_resenha():
         nova_resenha = None
@@ -50,6 +66,19 @@ class Biblioteca_Pessoal:
         self.lista_livros = [] #LISTA DE CLASSE LIVROS ADICIONADOS
         self.lista_categorias = [] #LISTA DE CLASSE CATEGORIAS
 
+
+
+
+    # ADICIONAR NO GERAL, SEM SER EM CATEGORIA
+    def adicionar_livro(lista_livros,livro):
+        livro = Livro()
+        livro.nome = input("Digite o livro que deseja adicionar na biblioteca: ")
+        lista_livros.append(livro)
+
+
+
+
+
     def adicionar_categoria(lista_categorias,categoria):
         categoria = Categoria_criada()
         categoria.nome = input("Digite a categoria que deseja criar: ")
@@ -62,17 +91,18 @@ class Biblioteca_Pessoal:
 
 class Catalogo:
     def __init__(self):
-        self.livros = [] # LISTA DE CLASSE LIVROS DIVERSOS 
+        self.lista_catalogo = [] # LISTA DE CLASSE LIVROS DIVERSOS 
+        #livros = livros
 
-    def ver_infos(livros):
-        #print({})
-        pass
+    def montar_catalogo(self,livros):
+        self.lista_catalogo.append(livros)
 
-    # ADICIONAR NO GERAL, SEM SER EM CATEGORIA
-    def adicionar_livro(lista_livros,livro):
-        livro = Livro()
-        livro.nome = input("Digite o livro que deseja adicionar na biblioteca: ")
-        lista_livros.append(livro)
+    def ver_infos(self):
+        for i in self.lista_catalogo:
+            print("Livros no catálogo: ", i)
+        
+
+    
 
 
 
@@ -87,16 +117,32 @@ class Usuario:
         self.biblioteca_pessoal = []
         self.meta_leitura = []
 
-    def cadastro(nome,email,senha):
-        pass
+    #def cadastro(nome,email,senha):
 
 
 
-#teste
-Livro1 = Livro("Romeu e Julieta", "shakespeare","01/04","05/04","Clássicos","4.5")
  
 
 if __name__ == "__main__":
+
+    # incompleto
+
     print("======== My Bookshelf ========")
+
+    # LIVROS DO CATÁLOGO
+    livro1 = Livro("Romeu e Julieta", "William Shakespeare","01/04","05/04","Clássicos",4)
+    livro2 = Livro("Crônicas de Nárnia", "C.S. Lewis", "28/03", "10/04","Fantasia", 3.5)
+    livro3 = Livro("Crime e Castigo", "Fiódor Dostoiévski", "20/03", "20/04", "Lidos do Clube do Livro", 5)
+    livro4 = Livro("The essence of software", "Daniel Jackson", "31/03", "01/04", "Não-Ficção", 5)
+
+    giovanna = Usuario("Giovanna", "exemploemail@gmail.com", "123456", "")
+
+    catalogo = Catalogo()
+    catalogo.montar_catalogo(livro1)
+    catalogo.montar_catalogo(livro2)
+    catalogo.montar_catalogo(livro3)
+    catalogo.montar_catalogo(livro4)
+
+    catalogo.ver_infos()
 
     
