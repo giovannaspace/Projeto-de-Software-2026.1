@@ -20,30 +20,33 @@ class Livro:
         self.etiqueta = etiqueta
         self.nota = nota
 
-    def adicionar_etiqueta(etiquetas):
+    def __str__(self):
+        return f"TÍTULO: {self.nome}, AUTOR(A): {self.autor}"
+
+    def adicionar_etiqueta(self,etiquetas ):
         etiqueta = input("Digite a etiqueta que deseja criar: ")
         # mostrar etiqueta
         print("Nova etiqueta: ", etiqueta) 
 
-    def excluir_etiqueta(etiquetas):
+    def excluir_etiqueta(self,etiquetas):
       #  etiqueta = input("Digite a etiqueta que deseja excluir: ")
         etiqueta = None
 
-    def atribuir_nota(nota):
+    def atribuir_nota(self,nota):
         nova_nota = float(input("Digite sua nota (1 a 5) para o livro indicado: "))
         # mostrar nota
         print("Nota: ", nova_nota)
 
-    def remover_nota(nota):
-        nova_nota = None
+    def remover_nota(self,nota):
+        self.nota = None
 
-    def escrever_resenha():
+    def escrever_resenha(self):
         nova_resenha = input("Digite sua resenha literária para o livro indicado: ")
         # mostrar resenha literária
         print("Resenha adicionada: ", nova_resenha)
 
-    def remover_resenha():
-        nova_resenha = None
+    def remover_resenha(self):
+        self.nova_resenha = None
 
     
 
@@ -55,7 +58,7 @@ class Categoria_criada:
         self.livros_add = []
       
     # CLASSE LIVROS DENTRO DA CATEGORIA
-    def adicionar_livro(livros_add,livro):
+    def adicionar_livro(self,livros_add,livro):
         livro = Livro()
         livro.nome = input("Digite o livro que deseja adicionar: ")
         livros_add.append(livro)
@@ -70,7 +73,7 @@ class Biblioteca_Pessoal:
 
 
     # ADICIONAR NO GERAL, SEM SER EM CATEGORIA
-    def adicionar_livro(lista_livros,livro):
+    def adicionar_livro(self,lista_livros,livro):
         livro = Livro()
         livro.nome = input("Digite o livro que deseja adicionar na biblioteca: ")
         lista_livros.append(livro)
@@ -79,12 +82,12 @@ class Biblioteca_Pessoal:
 
 
 
-    def adicionar_categoria(lista_categorias,categoria):
+    def adicionar_categoria(self,lista_categorias,categoria):
         categoria = Categoria_criada()
         categoria.nome = input("Digite a categoria que deseja criar: ")
         lista_categorias.append(categoria)
 
-    def excluir_categoria(lista_categorias,categoria):
+    def excluir_categoria(self,lista_categorias,categoria):
         categoria = input("Digite a categoria que deseja excluir: ")
         lista_categorias.remove(categoria)
 
@@ -145,4 +148,4 @@ if __name__ == "__main__":
 
     catalogo.ver_infos()
 
-    
+    montar_biblioteca = Biblioteca_Pessoal()
