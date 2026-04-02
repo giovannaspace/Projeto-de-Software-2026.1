@@ -1,3 +1,16 @@
+#funcionalidade 1 - Perfil do usuário
+#funcionalidade 2 - Catálogo de livros
+#funcionalidade 3 - Biblioteca pessoal
+#funcionalidade 4 - Adicionar resenha literária
+#funcionalidade 5 - Categorizar livros
+#funcionalidade 6 - Etiquetar livros
+#funcionalidade 7 - Definir metas literárias
+#funcionalidade 8 - Armazenar datas de início/fim de leituras
+#funcionalidade 9 - Retrospectiva dos livros datados naquele ano
+#funcionalidade 10 - Incentivo de leitura via e-mail
+
+# CÓDIGO COM MENU PARA TESTE/SIMULAÇÃO DE FUNCIONALIDADES
+
 # BIBLIOTECA PARA MANIPULAÇÃO DE DATAS
 from datetime import datetime,timedelta
 
