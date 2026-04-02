@@ -1,14 +1,3 @@
-#funcionalidade 1 - Perfil do usuário
-#funcionalidade 2 - Catálogo de livros
-#funcionalidade 3 - Biblioteca pessoal
-#funcionalidade 4 - Adicionar resenha literária
-#funcionalidade 5 - Categorizar livros
-#funcionalidade 6 - Etiquetar livros
-#funcionalidade 7 - Definir metas literárias
-#funcionalidade 8 - Armazenar datas de início/fim de leituras
-#funcionalidade 9 - Retrospectiva dos livros datados naquele ano
-#funcionalidade 10 - Incentivo de leitura via e-mail
-
 # BIBLIOTECA PARA MANIPULAÇÃO DE DATAS
 from datetime import datetime,timedelta
 
@@ -77,10 +66,6 @@ class Livros_Usuario(Livro):
         print(f'Datas cadastradas para esse livro:\nInício de leitura:{self.inicio_leitura}\nFinal de leitura: {self.final_leitura}')
 
 
-    def retrospectiva(self):
-        pass
-
-
     def __str__(self):
         infos_classe_mae = super().__str__() # reaproveitando TITULO e AUTOR
         return f"{infos_classe_mae}, ETIQUETA: {self.etiqueta}, NOTA: {self.nota}, RESENHA: {self.resenha}, DATA INÍCIO: {self.inicio_leitura}, DATA FINAL: {self.final_leitura}"
@@ -133,9 +118,6 @@ class Biblioteca_Pessoal:
         self.lista_livros = [] #LISTA DE CLASSE LIVROS ADICIONADOS
         self.lista_categorias = [] #LISTA DE CLASSE CATEGORIAS
 
-
-
-
     # ADICIONAR NO GERAL, SEM SER EM CATEGORIA
     def adicionar_livro(self,livro):
         #converter para SUBCLASSE para ADICIONAR MAIS INFORMAÇÕES 
@@ -162,7 +144,14 @@ class Biblioteca_Pessoal:
         for i in self.lista_categorias:
             print(i)
 
-
+    def retrospectiva(self,ano):
+        retrospectiva_anual = []
+        for i in self.lista_livros:
+            # se o ano de finalização esta cadastrado E é igual ao ano informado pelo usuário
+            if i.final_leitura.year and i.final_leitura.year == ano:
+                retrospectiva_anual.append(i)
+        for j in retrospectiva_anual:  #j é o objeto livro
+            print(j)
 
 # CADASTRO
 class Usuario:
@@ -272,7 +261,7 @@ if __name__ == "__main__":
                     print("Selecione o que deseja fazer: \n")
                     print("Aviso: Para conseguir utilizar as funcionalidades em um livro, adicione-o em sua biblioteca primeiro =)\n")
 
-                    opcao_interna = float(input("Opção 1 - Adicionar etiqueta em um livro\nOpção 2 - Adicionar avaliação em um livro\nOpção 3 - Adicionar resenha literária em um livro\nOpção 4 - Criar categoria\nOpção 5 - Preencher categoria\nOpção 6 - Add data de início\nOpção 7 - Add data finalização\nOpção 8 - Ver informações da biblioteca pessoal\nOpção 9 - Voltar para o menu\n"))
+                    opcao_interna = float(input("Opção 1 - Adicionar etiqueta em um livro\nOpção 2 - Adicionar avaliação em um livro\nOpção 3 - Adicionar resenha literária em um livro\nOpção 4 - Criar categoria\nOpção 5 - Preencher categoria\nOpção 6 - Add data de início\nOpção 7 - Add data finalização\nOpção 8 - Ver informações da biblioteca pessoal\nOpção 9 - Ver retrospectiva anual\nOpção 10 - Voltar para o menu\n"))
                    
                    #ETIQUETA
                     if opcao_interna == 1:
@@ -341,7 +330,7 @@ if __name__ == "__main__":
                     #DATA DE FIM
                     elif opcao_interna == 7:
                         livro = int(input("Digite o numero (1 a 6) do livro escolhido: \n"))
-                        data_add = input("Digite a data de fim de leitura no formato DD/MM/YYYY")
+                        data_add = input("Digite a data de fim de leitura no formato DD/MM/YYYY: ")
 
                         if livro > 6:
                             print("Livro não encontrado.")
@@ -353,3 +342,10 @@ if __name__ == "__main__":
                     #VER TUDO DA BIBLIOTECA
                     elif opcao_interna == 8:
                         minha_biblioteca.ver_infos()
+
+                    #RETROSPECTIVA ANUAL
+                    elif opcao_interna == 9:
+                        ano_escollhido = input("Informe o ano que você deseja ver a retrospectiva literária (formato YYYY): ")
+                        minha_biblioteca.retrospectiva(int(ano_escollhido))
+
+
