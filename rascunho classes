@@ -9,19 +9,36 @@
 #funcionalidade 9 - Retrospectiva dos livros datados naquele ano
 #funcionalidade 10 - Incentivo de leitura via e-mail
 
-# incompleto
+# BIBLIOTECA PARA MANIPULAÇÃO DE DATAS
+from datetime import datetime
 
+# SUPER CLASSE LIVRO -> PRESENTE NO CATÁLOGO DO MENU
 class Livro:
-    def __init__(self,nome,autor,inicio_leitura,final_leitura,etiqueta,nota):
+    def __init__(self,nome,autor):
         self.nome = nome
         self.autor = autor
-        self.inicio_leitura = inicio_leitura
-        self.final_leitura = final_leitura
-        self.etiqueta = etiqueta
-        self.nota = nota
 
+    #printar elementos dessa classe com esse formato
     def __str__(self):
         return f"TÍTULO: {self.nome}, AUTOR(A): {self.autor}"
+
+   
+
+# SUB CLASSE LIVROS DO USUARIO -> LIVROS SALVOS NA BIBLIOTECA DO USUÁRIO 
+# INFORMAÇÕES A MAIS: ETIQUETA, DATAS DE INÍCIO E FIM DE LEITURA , NOTAS E RESENHAS
+class Livros_Usuario(Livro):
+    def __init__(self,nome,autor,inicio_leitura,final_leitura,etiqueta,nota,resenha):
+
+        # reaproveitando (chamando) os atributos (informações do livro) da classe mãe:
+        super().__init__(self,nome,autor)
+
+        # atributos extras:
+        self.etiqueta = etiqueta
+        self.nota = nota
+        self.inicio_leitura = inicio_leitura
+        self.final_leitura = final_leitura
+        self.resenha = resenha
+
 
     def adicionar_etiqueta(self,etiquetas ):
         etiqueta = input("Digite a etiqueta que deseja criar: ")
@@ -48,7 +65,10 @@ class Livro:
     def remover_resenha(self):
         self.nova_resenha = None
 
-    
+
+
+
+
 
 
 #pastas = categorias
@@ -101,8 +121,9 @@ class Catalogo:
         self.lista_catalogo.append(livros)
 
     def ver_infos(self):
+        print("Livros no catálogo: ")
         for i in self.lista_catalogo:
-            print("Livros no catálogo: ", i)
+            print(i)
         
 
     
@@ -119,10 +140,11 @@ class Usuario:
         self.ultimo_acesso = None
 
 
-    def login(self,email,senha):
-        if self.email == email and self.__senha == senha:
-
-            print("Login realizado!")
+    def login(self,email_dado,senha_dada):
+        if self.email == email_dado and self.__senha == senha_dada:
+            self.ultimo_acesso = datetime.now()
+            print("Login realizado!\n")
+            print("Último acesso:",self.ultimo_acesso)
         else:
             print("Senha ou e-mail incorretos")
 
@@ -132,13 +154,15 @@ class Usuario:
 if __name__ == "__main__":
 
 
-    print("======== Catálogo de Livros ========\n")
+    print("-------- Catálogo de Livros ----------\n")
 
     # LIVROS ESCOLHIDOS PARA O CATÁLOGO PARA EXEMPLO DE FUNCIONALIDADE
-    livro1 = Livro("Romeu e Julieta", "William Shakespeare","01/04","05/04","Clássicos",4)
-    livro2 = Livro("Crônicas de Nárnia", "C.S. Lewis", "28/03", "10/04","Fantasia", 3.5)
-    livro3 = Livro("Crime e Castigo", "Fiódor Dostoiévski", "20/03", "20/04", "Lidos do Clube do Livro", 5)
-    livro4 = Livro("The essence of software", "Daniel Jackson", "31/03", "01/04", "Não-Ficção", 5)
+    livro1 = Livro("Romeu e Julieta", "William Shakespeare")
+    livro2 = Livro("Crônicas de Nárnia", "C.S. Lewis")
+    livro3 = Livro("Crime e Castigo", "Fiódor Dostoiévski")
+    livro4 = Livro("The essence of software", "Daniel Jackson")
+    livro5 = Livro("Estruturas de Dados em C", "Márcio Ribeiro")
+    livro6 = Livro("Jujutsu Kaisen Vol 19", "Gege Akutami")
 
 
     catalogo = Catalogo()
@@ -146,23 +170,26 @@ if __name__ == "__main__":
     catalogo.montar_catalogo(livro2)
     catalogo.montar_catalogo(livro3)
     catalogo.montar_catalogo(livro4)
+    catalogo.montar_catalogo(livro5)
+    catalogo.montar_catalogo(livro6)
+
 
     catalogo.ver_infos()
-    print("====================================\n")
+    #print("--------------------------------------\n")
 
 
-    print("========== Cadastro e Login de Usuário ==========\n")
+    print("------------ Cadastro e Login de Usuário ------------\n")
 
-    giovanna = Usuario("Giovanna", "exemploemail@gmail.com", "123456", "")
+    giovanna = Usuario("Giovanna", "exemplodeemail@gmail.com", "123456")
+    giovanna.login("exemplodeemail@gmail.com","123456")
 
-    print("=========================================\n")
+   #print("--------------------------------------\n")
 
 
-    print("========== Biblioteca Pessoal ==========\n")
+    print("----------- Biblioteca Pessoal ----------\n")
 
     # categorias, etiqueta, nota, resenha
     montar_biblioteca = Biblioteca_Pessoal()
 
-    print("=========================================\n")
-
+    #print("--------------------------------------\n")
 
