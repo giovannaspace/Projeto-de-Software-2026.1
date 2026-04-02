@@ -9,6 +9,8 @@
 #funcionalidade 9 - Retrospectiva dos livros datados naquele ano
 #funcionalidade 10 - Incentivo de leitura via e-mail
 
+
+
 # BIBLIOTECA PARA MANIPULAÇÃO DE DATAS
 from datetime import datetime,timedelta
 
@@ -76,6 +78,12 @@ class Livros_Usuario(Livro):
     def ver_datas(self):
         print(f'Datas cadastradas para esse livro:\nInício de leitura:{self.inicio_leitura}\nFinal de leitura: {self.final_leitura}')
 
+
+    def retrospectiva(self):
+        pass
+
+
+
 #pastas = categorias
 class Categoria:
     def __init__(self,nome):
@@ -137,7 +145,10 @@ class Biblioteca_Pessoal:
         #categoria = input("Digite a categoria que deseja excluir: ")
         self.lista_categorias.remove(categoria)
 
-
+    def ver_infos(self):
+        print("Livros na biblioteca: ")
+        for i in self.lista_livros:
+            print(i)
     
 
 
@@ -158,14 +169,16 @@ class Usuario:
             self.ultimo_acesso = datetime.now()
             print("Login realizado!\n")
             print("Último acesso:",self.ultimo_acesso)
+            return True 
         else:
             print("Senha ou e-mail incorretos")
+            return False # não inicializa o menu
 
     def incentivo_leitura(self):
         # saber a quantos dias o usuario não faz login para enviar o incentivo
         diferenca_dias = datetime.now() - self.ultimo_acesso
         if diferenca_dias > timedelta(days=30):  #timedelta = duração do tempo
-            pass #ENVIAR INCENTIVO POR EMAIL... 
+            pass #ENVIAR INCENTIVO POR EMAIL 
         # USAR smtplib 
 
 
@@ -173,8 +186,6 @@ class Usuario:
 
 if __name__ == "__main__":
 
-
-    print("-------- Catálogo de Livros ----------\n")
 
     # LIVROS ESCOLHIDOS PARA O CATÁLOGO PARA EXEMPLO DE FUNCIONALIDADE
     livro1 = Livro("Romeu e Julieta", "William Shakespeare")
@@ -194,44 +205,89 @@ if __name__ == "__main__":
     catalogo.montar_catalogo(livro6)
 
 
-    catalogo.ver_infos()
-    #print("--------------------------------------\n")
-
 
     print("------------ Cadastro e Login de Usuário ------------\n")
 
-    giovanna = Usuario("Giovanna", "exemplodeemail@gmail.com", "123456")
-    giovanna.login("exemplodeemail@gmail.com","123456")
+    print("Seja bem-vindo(a) a sua estante! Para fazer o cadastro, utilize seu e-mail e defina seu nome de usuário e senha.\n")
+    input_usuario = input("Digite seu nome de usuario: \n")
+    input_email = input("Digite seu e-mail: \n")
+    input_senha = input("Crie sua senha: \n")  # falta mascarar a senha
 
-   #print("--------------------------------------\n")
+    usuario = Usuario(input_usuario,input_email,input_senha)
+
+    print("Agora faça seu login para acessar as funcionalidades.\n")
+    login_email = input("Digite seu e-mail: \n")
+    login_senha = input("Digite sua senha: \n")  # falta mascarar a senha
+
+    checagem = usuario.login(login_email,login_senha)
+
+    if not checagem:
+        print("Erro ao inicializar menu.")
+
+    else:
+        #livro_adicionado = None # poder usar os atributos especificos no menu
+        montar_biblioteca = Biblioteca_Pessoal()
+
+        while True:
+
+            print("Selecione o que deseja fazer: \n")
+
+            opcao = float(input("Opção 1 - Mostrar Catálogo\nOpção 2 - Acessar Biblioteca Pessoal\n"))
+
+            if opcao == 1:
+                print("-------- Catálogo de Livros ----------\n")
+                catalogo.ver_infos()
+                print("\n")
+                numero = float(input("Deseja adicionar livros na sua biblioteca?\nDigite o numero (1 a 6) do livro escolhido:"))
+
+                if numero == 1:
+                    montar_biblioteca.adicionar_livro(livro1) 
+                elif numero == 2:
+                    montar_biblioteca.adicionar_livro(livro2)
+                elif numero == 3:
+                    montar_biblioteca.adicionar_livro(livro3) 
+                elif numero == 4:
+                    montar_biblioteca.adicionar_livro(livro4) 
+                elif numero == 5:
+                    montar_biblioteca.adicionar_livro(livro5) 
+                elif numero == 6:
+                    montar_biblioteca.adicionar_livro(livro6) 
+                else:
+                    print("Livro não encontrado.")
+                    break
+                
+
+            elif opcao == 2:
+                print("----------- Biblioteca Pessoal ----------\n")  # categorias, etiqueta, nota, resenha
+                # CHECAR SE ALGUM LIVRO FOI ADICIONADO NA BIBLIOTECA
+                if not montar_biblioteca.lista_livros:
+                    print("Nenhum livro foi adicionado ainda.\n")
+                    break
+                else:
+                    montar_biblioteca.ver_infos()
+                    opcao_interna = float(input("Deseja voltar para o menu? Digite 3.\n"))
+                   
+
+'''
+            # criando categorias
+
+            nova_categoria1 = montar_biblioteca.adicionar_categoria("Leituras Acadêmicas")
+            # como o metodo adicionar_livro retorna a subclasse (livro com mais especificações), armazena numa variavel pra poder utilizar novos atributos e métodos
+            livro5_usuario = nova_categoria1.adicionar_livro(livro5) 
+            livro5_usuario.adicionar_etiqueta("Segundo período EC")
+            nova_categoria1.printar_categoria()
 
 
-    print("----------- Biblioteca Pessoal ----------\n")  # categorias, etiqueta, nota, resenha
-
-    # exemplo de funcionalidade: adicionar 3 livros do catálogo no perfil
-    montar_biblioteca = Biblioteca_Pessoal()
-    montar_biblioteca.adicionar_livro(livro6) 
-    montar_biblioteca.adicionar_livro(livro4) 
-    montar_biblioteca.adicionar_livro(livro1) 
-
-    # criando categorias
-
-    nova_categoria1 = montar_biblioteca.adicionar_categoria("Leituras Acadêmicas")
-    # como o metodo adicionar_livro retorna a subclasse (livro com mais especificações), armazena numa variavel pra poder utilizar novos atributos e métodos
-    livro5_usuario = nova_categoria1.adicionar_livro(livro5) 
-    livro5_usuario.adicionar_etiqueta("Segundo período EC")
-    nova_categoria1.printar_categoria()
-
-
-    nova_categoria_2 = montar_biblioteca.adicionar_categoria("Lidos 2026")
-    # como o metodo adicionar_livro retorna a subclasse (livro com mais especificações), armazena numa variavel pra poder utilizar novos atributos e métodos
-    livro1_usuario = nova_categoria_2.adicionar_livro(livro1)
+            nova_categoria_2 = montar_biblioteca.adicionar_categoria("Lidos 2026")
+            # como o metodo adicionar_livro retorna a subclasse (livro com mais especificações), armazena numa variavel pra poder utilizar novos atributos e métodos
+            livro1_usuario = nova_categoria_2.adicionar_livro(livro1)
     
-    livro1_usuario.atribuir_nota("5/5")
-    livro1_usuario.data_inicio("30/03/2026")
-    livro1_usuario.data_final("01/04/2026")
-    livro1_usuario.ver_datas()
+            livro1_usuario.atribuir_nota("5/5")
+            livro1_usuario.data_inicio("30/03/2026")
+            livro1_usuario.data_final("01/04/2026")
+            livro1_usuario.ver_datas()
 
-    nova_categoria_2.printar_categoria()
-    #print("--------------------------------------\n")
+            nova_categoria_2.printar_categoria()
+            #print("--------------------------------------\n")
 
+'''
