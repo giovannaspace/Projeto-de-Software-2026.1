@@ -9,8 +9,6 @@
 #funcionalidade 9 - Retrospectiva dos livros datados naquele ano
 #funcionalidade 10 - Incentivo de leitura via e-mail
 
-
-
 # BIBLIOTECA PARA MANIPULAÇÃO DE DATAS
 from datetime import datetime,timedelta
 
@@ -49,7 +47,7 @@ class Livros_Usuario(Livro):
 
     def atribuir_nota(self,nota):
         self.nota = nota # atualizar valor 
-        print("Nota: ", self.nota)
+        print(f"Nota: {self.nota}/5")
 
     def remover_nota(self):
         self.nota = None
@@ -150,6 +148,10 @@ class Biblioteca_Pessoal:
         for i in self.lista_livros:
             print(i)
     
+    def ver_categorias(self):
+        print("Categorias: ")
+        for i in self.lista_categorias:
+            print(i)
 
 
 
@@ -226,7 +228,7 @@ if __name__ == "__main__":
 
     else:
         #livro_adicionado = None # poder usar os atributos especificos no menu
-        montar_biblioteca = Biblioteca_Pessoal()
+        minha_biblioteca = Biblioteca_Pessoal()
 
         while True:
 
@@ -238,35 +240,111 @@ if __name__ == "__main__":
                 print("-------- Catálogo de Livros ----------\n")
                 catalogo.ver_infos()
                 print("\n")
-                numero = float(input("Deseja adicionar livros na sua biblioteca?\nDigite o numero (1 a 6) do livro escolhido:"))
+                numero = int(input("Deseja adicionar livros na sua biblioteca?\nDigite o numero (1 a 6) do livro escolhido:"))
 
-                if numero == 1:
-                    montar_biblioteca.adicionar_livro(livro1) 
-                elif numero == 2:
-                    montar_biblioteca.adicionar_livro(livro2)
-                elif numero == 3:
-                    montar_biblioteca.adicionar_livro(livro3) 
-                elif numero == 4:
-                    montar_biblioteca.adicionar_livro(livro4) 
-                elif numero == 5:
-                    montar_biblioteca.adicionar_livro(livro5) 
-                elif numero == 6:
-                    montar_biblioteca.adicionar_livro(livro6) 
-                else:
+                if numero > 6:
                     print("Livro não encontrado.")
                     break
                 
-
+                novo_livro = catalogo.lista_catalogo[numero - 1]
+                
+                minha_biblioteca.adicionar_livro(novo_livro) 
+               
+            
             elif opcao == 2:
                 print("----------- Biblioteca Pessoal ----------\n")  # categorias, etiqueta, nota, resenha
                 # CHECAR SE ALGUM LIVRO FOI ADICIONADO NA BIBLIOTECA
-                if not montar_biblioteca.lista_livros:
+                if not minha_biblioteca.lista_livros:
                     print("Nenhum livro foi adicionado ainda.\n")
                     break
                 else:
-                    montar_biblioteca.ver_infos()
-                    opcao_interna = float(input("Deseja voltar para o menu? Digite 3.\n"))
+                    minha_biblioteca.ver_infos()
+                    print("\n")
+                    print("Selecione o que deseja fazer: \n")
+                    print("Aviso: Para conseguir utilizar as funcionalidades em um livro, adicione-o em sua biblioteca primeiro =)\n")
+
+                    opcao_interna = float(input("Opção 1 - Adicionar etiqueta em um livro\nOpção 2 - Adicionar avaliação em um livro\nOpção 3 - Adicionar resenha literária em um livro\nOpção 4 - Criar categoria\nOpção 5 - Preencher categoria\nOpção 6 - Add data de início\nOpção 7 - Add data finalização\nOpção 8- Ver informações da biblioteca pessoal\nOpção 9 - Voltar para o menu\n"))
                    
+                   #ETIQUETA
+                    if opcao_interna == 1:
+                        livro = int(input("Digite o numero (1 a 6) do livro escolhido: \n"))
+                        etiqueta_add = input("Digite sua nova etiqueta: \n" )
+
+                        if livro > 6:
+                            print("Livro não encontrado.")
+                            break
+                        livro_escolhido = minha_biblioteca.lista_livros[livro - 1]
+                        livro_escolhido.adicionar_etiqueta(etiqueta_add)
+
+                    #AVALIAÇÃO
+                    elif opcao_interna == 2:
+                        livro = int(input("Digite o numero (1 a 6) do livro escolhido: \n"))
+                        nota_add = float(input("Digite sua avaliação: \n"))
+
+                        if livro > 6:
+                            print("Livro não encontrado.")
+                            break
+
+                        livro_escolhido = minha_biblioteca.lista_livros[livro - 1]
+                        livro_escolhido.atribuir_nota(nota_add)                        
+                                              
+                    #RESENHA
+                    elif opcao_interna == 3:
+                        livro = int(input("Digite o numero (1 a 6) do livro escolhido: \n"))
+                        resenha_add = input("Digite sua resenha literária: \n")
+
+                        if livro > 6:
+                            print("Livro não encontrado.")
+                            break
+
+                        livro_escolhido = minha_biblioteca.lista_livros[livro - 1]
+                        livro_escolhido.escrever_resenha(resenha_add)
+
+                    #CATEGORIA
+                    elif opcao_interna == 4:
+                        nome_categoria = input("Digite a categoria que deseja criar: ")
+                        nova_categoria = minha_biblioteca.adicionar_categoria(nome_categoria)
+                        minha_biblioteca.ver_categorias()
+
+                    #PREENCHER CATEGORIA
+                    elif opcao_interna == 5:
+                        livro = int(input("Digite o numero (1 a 6) do livro escolhido: \n"))
+                        categoria_add = int(input("Digite o índice da categoria que deseja adicionar o livro: \n"))
+
+                        livro_escolhido = minha_biblioteca.lista_livros[livro - 1]
+                        categoria_escolhida = minha_biblioteca.lista_categorias[categoria_add - 1]
+                        
+                        categoria_escolhida.adicionar_livro(livro_escolhido)
+                        categoria_escolhida.printar_categoria()
+
+                    #DATA DE INICIO
+                    elif opcao_interna == 6:
+                        livro = int(input("Digite o numero (1 a 6) do livro escolhido: \n"))
+                        data_add = input("Digite a data de início de leitura no formato DD/MM/YYYY")
+
+                        if livro > 6:
+                            print("Livro não encontrado.")
+                            break
+
+                        livro_escolhido = minha_biblioteca.lista_livros[livro - 1]
+                        livro_escolhido.data_inicio(data_add)
+
+                    #DATA DE FIM
+                    elif opcao_interna == 7:
+                        livro = int(input("Digite o numero (1 a 6) do livro escolhido: \n"))
+                        data_add = input("Digite a data de fim de leitura no formato DD/MM/YYYY")
+
+                        if livro > 6:
+                            print("Livro não encontrado.")
+                            break
+
+                        livro_escolhido = minha_biblioteca.lista_livros[livro - 1]
+                        livro_escolhido.data_final(data_add)
+
+                    #VER TUDO DA BIBLIOTECA
+                    elif opcao_interna == 8:
+                        minha_biblioteca.ver_infos()
+
 
 '''
             # criando categorias
