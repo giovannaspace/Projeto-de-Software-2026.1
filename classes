@@ -28,7 +28,7 @@ class Livro:
 # INFORMAÇÕES A MAIS: ETIQUETA, DATAS DE INÍCIO E FIM DE LEITURA , NOTAS E RESENHAS
 class Livros_Usuario(Livro):
     def __init__(self,livro,inicio_leitura = None,final_leitura = None,etiqueta=None,nota=None,resenha=None):  #parametro livro pra extrair nome e autor (infos primarias) 
-        # reaproveitando (chamando) os atributos (informações do livro) da classe mãe:
+        # reaproveitando (chamando) os atributos (informações do livro) da classe mãe e também a formatação da exibição (str):
         super().__init__(livro.nome,livro.autor)
 
         # atributos opcionais que podem ser adicionados depois pelo usuário
@@ -81,6 +81,11 @@ class Livros_Usuario(Livro):
         pass
 
 
+    def __str__(self):
+        infos_classe_mae = super().__str__() # reaproveitando TITULO e AUTOR
+        return f"{infos_classe_mae}, ETIQUETA: {self.etiqueta}, NOTA: {self.nota}, RESENHA: {self.resenha}, DATA INÍCIO: {self.inicio_leitura}, DATA FINAL: {self.final_leitura}"
+
+
 
 #pastas = categorias
 class Categoria:
@@ -97,10 +102,14 @@ class Categoria:
     def retirar_livro(self,livro):
         self.livros_adicionados.remove(livro)
 
+    # PRINTAR CONTEUDO DA CATEGORIA
     def printar_categoria(self):
         print(f'\nLivros na categoria: {self.nome}')
         for i in self.livros_adicionados:
             print(i)
+
+    def __str__(self):
+        return f"{self.nome}"
 
 
 # api de livros (google livros é uma opção)
@@ -263,7 +272,7 @@ if __name__ == "__main__":
                     print("Selecione o que deseja fazer: \n")
                     print("Aviso: Para conseguir utilizar as funcionalidades em um livro, adicione-o em sua biblioteca primeiro =)\n")
 
-                    opcao_interna = float(input("Opção 1 - Adicionar etiqueta em um livro\nOpção 2 - Adicionar avaliação em um livro\nOpção 3 - Adicionar resenha literária em um livro\nOpção 4 - Criar categoria\nOpção 5 - Preencher categoria\nOpção 6 - Add data de início\nOpção 7 - Add data finalização\nOpção 8- Ver informações da biblioteca pessoal\nOpção 9 - Voltar para o menu\n"))
+                    opcao_interna = float(input("Opção 1 - Adicionar etiqueta em um livro\nOpção 2 - Adicionar avaliação em um livro\nOpção 3 - Adicionar resenha literária em um livro\nOpção 4 - Criar categoria\nOpção 5 - Preencher categoria\nOpção 6 - Add data de início\nOpção 7 - Add data finalização\nOpção 8 - Ver informações da biblioteca pessoal\nOpção 9 - Voltar para o menu\n"))
                    
                    #ETIQUETA
                     if opcao_interna == 1:
@@ -344,28 +353,3 @@ if __name__ == "__main__":
                     #VER TUDO DA BIBLIOTECA
                     elif opcao_interna == 8:
                         minha_biblioteca.ver_infos()
-
-
-'''
-            # criando categorias
-
-            nova_categoria1 = montar_biblioteca.adicionar_categoria("Leituras Acadêmicas")
-            # como o metodo adicionar_livro retorna a subclasse (livro com mais especificações), armazena numa variavel pra poder utilizar novos atributos e métodos
-            livro5_usuario = nova_categoria1.adicionar_livro(livro5) 
-            livro5_usuario.adicionar_etiqueta("Segundo período EC")
-            nova_categoria1.printar_categoria()
-
-
-            nova_categoria_2 = montar_biblioteca.adicionar_categoria("Lidos 2026")
-            # como o metodo adicionar_livro retorna a subclasse (livro com mais especificações), armazena numa variavel pra poder utilizar novos atributos e métodos
-            livro1_usuario = nova_categoria_2.adicionar_livro(livro1)
-    
-            livro1_usuario.atribuir_nota("5/5")
-            livro1_usuario.data_inicio("30/03/2026")
-            livro1_usuario.data_final("01/04/2026")
-            livro1_usuario.ver_datas()
-
-            nova_categoria_2.printar_categoria()
-            #print("--------------------------------------\n")
-
-'''
