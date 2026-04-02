@@ -10,7 +10,7 @@
 #funcionalidade 10 - Incentivo de leitura via e-mail
 
 # BIBLIOTECA PARA MANIPULAÇÃO DE DATAS
-from datetime import datetime
+from datetime import datetime,timedelta
 
 # SUPER CLASSE LIVRO -> PRESENTE NO CATÁLOGO DO MENU
 class Livro:
@@ -40,30 +40,26 @@ class Livros_Usuario(Livro):
         self.resenha = resenha
 
 
-    def adicionar_etiqueta(self,etiquetas ):
-        etiqueta = input("Digite a etiqueta que deseja criar: ")
-        # mostrar etiqueta
-        print("Nova etiqueta: ", etiqueta) 
+    def adicionar_etiqueta(self,etiqueta):
+        self.etiqueta = input("Digite a etiqueta que deseja criar: ")
+        print("Nova etiqueta: ", self.etiqueta) 
 
-    def excluir_etiqueta(self,etiquetas):
-      #  etiqueta = input("Digite a etiqueta que deseja excluir: ")
-        etiqueta = None
+    def excluir_etiqueta(self, etiqueta):
+        self.etiqueta = None
 
     def atribuir_nota(self,nota):
-        nova_nota = float(input("Digite sua nota (1 a 5) para o livro indicado: "))
-        # mostrar nota
-        print("Nota: ", nova_nota)
+        self.nota = float(input("Digite sua nota (1 a 5) para o livro indicado: "))
+        print("Nota: ", self.nota)
 
     def remover_nota(self,nota):
         self.nota = None
 
-    def escrever_resenha(self):
-        nova_resenha = input("Digite sua resenha literária para o livro indicado: ")
-        # mostrar resenha literária
-        print("Resenha adicionada: ", nova_resenha)
+    def escrever_resenha(self,resenha):
+        self.resenha = input("Digite sua resenha literária para o livro indicado: ")
+        print("Resenha adicionada: ", self.resenha)
 
-    def remover_resenha(self):
-        self.nova_resenha = None
+    def remover_resenha(self,resenha):
+        self.resenha = None
 
 
 
@@ -112,10 +108,12 @@ class Biblioteca_Pessoal:
         lista_categorias.remove(categoria)
 
 
+
+
+
 class Catalogo:
     def __init__(self):
         self.lista_catalogo = [] # LISTA DE CLASSE LIVROS DIVERSOS 
-        #livros = livros
 
     def montar_catalogo(self,livros):
         self.lista_catalogo.append(livros)
@@ -147,6 +145,13 @@ class Usuario:
             print("Último acesso:",self.ultimo_acesso)
         else:
             print("Senha ou e-mail incorretos")
+
+    def incentivo_leitura(self):
+        # saber a quantos dias o usuario não faz login para enviar o incentivo
+        diferenca_dias = datetime.now() - self.ultimo_acesso
+        if diferenca_dias > timedelta(days=30):  #timedelta = duração do tempo
+            pass #ENVIAR INCENTIVO POR EMAIL... 
+        # USAR smtplib 
 
 
  
