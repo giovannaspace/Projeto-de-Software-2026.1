@@ -130,6 +130,7 @@ class Biblioteca_Pessoal:
     def __init__(self):
         self.lista_livros = [] #LISTA DE CLASSE LIVROS ADICIONADOS
         self.lista_categorias = [] #LISTA DE CLASSE CATEGORIAS
+        self.meta_literaria = []
 
     # ADICIONAR NO GERAL, SEM SER EM CATEGORIA
     def adicionar_livro(self,livro):
@@ -159,12 +160,21 @@ class Biblioteca_Pessoal:
 
     def retrospectiva(self,ano):
         retrospectiva_anual = []
-        for i in self.lista_livros:
+        for i in self.lista_livros: 
             # se o ano de finalização esta cadastrado E é igual ao ano informado pelo usuário
             if i.final_leitura.year and i.final_leitura.year == ano:
                 retrospectiva_anual.append(i)
         for j in retrospectiva_anual:  #j é o objeto livro
             print(j)
+
+
+    def definir_meta(self,livro):
+        self.meta_literaria.append(livro) # ja recebe o objeto livro do menu
+        for i in self.meta_literaria:
+            print("Desejo ler: ", i)
+
+
+
 
 # CADASTRO
 class Usuario:
@@ -173,7 +183,6 @@ class Usuario:
         self.email = email
         self.__senha = senha #dois underlines para proteger o dado sigiloso
         self.biblioteca_pessoal = []
-        self.meta_leitura = []
         self.ultimo_acesso = None
 
 
@@ -193,7 +202,7 @@ class Usuario:
         if diferenca_dias > timedelta(days=30):  #timedelta = duração do tempo
             pass #ENVIAR INCENTIVO POR EMAIL 
         # USAR smtplib 
-
+        
 
  
 
@@ -274,7 +283,7 @@ if __name__ == "__main__":
                     print("Selecione o que deseja fazer: \n")
                     print("Aviso: Para conseguir utilizar as funcionalidades em um livro, adicione-o em sua biblioteca primeiro =)\n")
 
-                    opcao_interna = float(input("Opção 1 - Adicionar etiqueta em um livro\nOpção 2 - Adicionar avaliação em um livro\nOpção 3 - Adicionar resenha literária em um livro\nOpção 4 - Criar categoria\nOpção 5 - Preencher categoria\nOpção 6 - Add data de início\nOpção 7 - Add data finalização\nOpção 8 - Ver informações da biblioteca pessoal\nOpção 9 - Ver retrospectiva anual\nOpção 10 - Voltar para o menu\n"))
+                    opcao_interna = float(input("Opção 1 - Adicionar etiqueta em um livro\nOpção 2 - Adicionar avaliação em um livro\nOpção 3 - Adicionar resenha literária em um livro\nOpção 4 - Criar categoria\nOpção 5 - Preencher categoria\nOpção 6 - Add data de início\nOpção 7 - Add data finalização\nOpção 8 - Ver informações da biblioteca pessoal\nOpção 9 - Ver retrospectiva anual\nOpção 10 - Definir meta de leitura\nOpção 11 - Voltar para o menu\n"))
                    
                    #ETIQUETA
                     if opcao_interna == 1:
@@ -361,4 +370,13 @@ if __name__ == "__main__":
                         ano_escollhido = input("Informe o ano que você deseja ver a retrospectiva literária (formato YYYY): ")
                         minha_biblioteca.retrospectiva(int(ano_escollhido))
 
+                    #DEFINIR META LITERÁRIA
+                    elif opcao_interna == 10:
+                        minha_biblioteca.ver_infos()
+                        livro = int(input("Digite o numero (1 a 6) do livro escolhido (BIBLIOTECA): \n"))
+                        if livro > len(minha_biblioteca.lista_livros):
+                            print("Livro não encontrado.")
+                            break
 
+                        livro_escolhido = minha_biblioteca.lista_livros[livro - 1]
+                        minha_biblioteca.definir_meta(livro_escolhido)
