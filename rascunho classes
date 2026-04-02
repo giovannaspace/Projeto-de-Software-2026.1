@@ -65,7 +65,7 @@ class Categoria_criada:
 
 
 class Biblioteca_Pessoal:
-    def __init__(self,total):
+    def __init__(self):
         self.lista_livros = [] #LISTA DE CLASSE LIVROS ADICIONADOS
         self.lista_categorias = [] #LISTA DE CLASSE CATEGORIAS
 
@@ -108,37 +108,38 @@ class Catalogo:
     
 
 
-
-
-
+# CADASTRO
 class Usuario:
-    def __init__(self, nome,email,senha,ultimo_acesso):
+    def __init__(self, nome,email,senha):
         self.nome = nome
         self.email = email
         self.__senha = senha #dois underlines para proteger o dado sigiloso
-        self.ultimo_acesso = ultimo_acesso
         self.biblioteca_pessoal = []
         self.meta_leitura = []
+        self.ultimo_acesso = None
 
-    #def cadastro(nome,email,senha):
 
+    def login(self,email,senha):
+        if self.email == email and self.__senha == senha:
+
+            print("Login realizado!")
+        else:
+            print("Senha ou e-mail incorretos")
 
 
  
 
 if __name__ == "__main__":
 
-    # incompleto
 
-    print("======== My Bookshelf ========")
+    print("======== Catálogo de Livros ========\n")
 
-    # LIVROS DO CATÁLOGO
+    # LIVROS ESCOLHIDOS PARA O CATÁLOGO PARA EXEMPLO DE FUNCIONALIDADE
     livro1 = Livro("Romeu e Julieta", "William Shakespeare","01/04","05/04","Clássicos",4)
     livro2 = Livro("Crônicas de Nárnia", "C.S. Lewis", "28/03", "10/04","Fantasia", 3.5)
     livro3 = Livro("Crime e Castigo", "Fiódor Dostoiévski", "20/03", "20/04", "Lidos do Clube do Livro", 5)
     livro4 = Livro("The essence of software", "Daniel Jackson", "31/03", "01/04", "Não-Ficção", 5)
 
-    giovanna = Usuario("Giovanna", "exemploemail@gmail.com", "123456", "")
 
     catalogo = Catalogo()
     catalogo.montar_catalogo(livro1)
@@ -147,5 +148,21 @@ if __name__ == "__main__":
     catalogo.montar_catalogo(livro4)
 
     catalogo.ver_infos()
+    print("====================================\n")
 
+
+    print("========== Cadastro e Login de Usuário ==========\n")
+
+    giovanna = Usuario("Giovanna", "exemploemail@gmail.com", "123456", "")
+
+    print("=========================================\n")
+
+
+    print("========== Biblioteca Pessoal ==========\n")
+
+    # categorias, etiqueta, nota, resenha
     montar_biblioteca = Biblioteca_Pessoal()
+
+    print("=========================================\n")
+
+
