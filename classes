@@ -27,57 +27,90 @@ class Livro:
 # SUB CLASSE LIVROS DO USUARIO -> LIVROS SALVOS NA BIBLIOTECA DO USUÁRIO 
 # INFORMAÇÕES A MAIS: ETIQUETA, DATAS DE INÍCIO E FIM DE LEITURA , NOTAS E RESENHAS
 class Livros_Usuario(Livro):
-    def __init__(self,nome,autor,inicio_leitura,final_leitura,etiqueta,nota,resenha):
-
+    def __init__(self,livro,inicio_leitura = None,final_leitura = None,etiqueta=None,nota=None,resenha=None):  #parametro livro pra extrair nome e autor (infos primarias) 
         # reaproveitando (chamando) os atributos (informações do livro) da classe mãe:
-        super().__init__(self,nome,autor)
+        super().__init__(livro.nome,livro.autor)
 
-        # atributos extras:
+        # atributos opcionais que podem ser adicionados depois pelo usuário
         self.etiqueta = etiqueta
         self.nota = nota
         self.inicio_leitura = inicio_leitura
         self.final_leitura = final_leitura
         self.resenha = resenha
 
-
     def adicionar_etiqueta(self,etiqueta):
-        self.etiqueta = input("Digite a etiqueta que deseja criar: ")
-        print("Nova etiqueta: ", self.etiqueta) 
+        self.etiqueta = etiqueta # atualizar valor 
+        print(f'Nova etiqueta para o livro "{self.nome}":  "{self.etiqueta}" ')
 
-    def excluir_etiqueta(self, etiqueta):
+    def excluir_etiqueta(self):
         self.etiqueta = None
 
     def atribuir_nota(self,nota):
-        self.nota = float(input("Digite sua nota (1 a 5) para o livro indicado: "))
+        self.nota = nota # atualizar valor 
         print("Nota: ", self.nota)
 
-    def remover_nota(self,nota):
+    def remover_nota(self):
         self.nota = None
 
     def escrever_resenha(self,resenha):
-        self.resenha = input("Digite sua resenha literária para o livro indicado: ")
+        self.resenha = resenha # atualizar valor 
         print("Resenha adicionada: ", self.resenha)
 
-    def remover_resenha(self,resenha):
+    def remover_resenha(self):
         self.resenha = None
 
+    def data_inicio(self,inicio_leitura):
+        #converter string informada pelo usuario para uma data 
+        #self.inicio_leitura = input("Digite a data de início da leitura no formato DIA/MÊS/ANO: ")
 
+        self.inicio_leitura = inicio_leitura # atualizar valor 
+        self.inicio_leitura = datetime.strptime(self.inicio_leitura, "%d/%m/%Y").date() # retornar apenas data, sem a hora
 
+    def data_final(self,final_leitura):
+        #converter string informada pelo usuario para uma data 
+       #self.final_leitura = input("Digite a data de término da leitura no formato DIA/MÊS/ANO: ")
 
-
-
+        self.final_leitura = final_leitura # atualizar valor 
+        self.final_leitura = datetime.strptime(self.final_leitura, "%d/%m/%Y").date() # retornar apenas data, sem a hora
+    
+    def ver_datas(self):
+        print(f'Datas cadastradas para esse livro:\nInício de leitura:{self.inicio_leitura}\nFinal de leitura: {self.final_leitura}')
 
 #pastas = categorias
-class Categoria_criada:
+class Categoria:
     def __init__(self,nome):
         self.nome = nome
-        self.livros_add = []
+        self.livros_adicionados = []
       
     # CLASSE LIVROS DENTRO DA CATEGORIA
-    def adicionar_livro(self,livros_add,livro):
-        livro = Livro()
-        livro.nome = input("Digite o livro que deseja adicionar: ")
-        livros_add.append(livro)
+    def adicionar_livro(self,livro):
+        livro_usuario = Livros_Usuario(livro)
+        self.livros_adicionados.append(livro_usuario)
+        return livro_usuario
+
+    def retirar_livro(self,livro):
+        self.livros_adicionados.remove(livro)
+
+    def printar_categoria(self):
+        print(f'\nLivros na categoria: {self.nome}')
+        for i in self.livros_adicionados:
+            print(i)
+
+
+# api de livros (google livros é uma opção)
+class Catalogo:
+    def __init__(self):
+        self.lista_catalogo = []  
+
+    def montar_catalogo(self,livros):
+        self.lista_catalogo.append(livros)
+
+    def ver_infos(self):
+        print("Livros no catálogo: ")
+        for i in self.lista_catalogo:
+            print(i)
+        
+
 
 
 class Biblioteca_Pessoal:
@@ -89,42 +122,24 @@ class Biblioteca_Pessoal:
 
 
     # ADICIONAR NO GERAL, SEM SER EM CATEGORIA
-    def adicionar_livro(self,lista_livros,livro):
-        livro = Livro()
-        livro.nome = input("Digite o livro que deseja adicionar na biblioteca: ")
-        lista_livros.append(livro)
+    def adicionar_livro(self,livro):
+        #converter para SUBCLASSE para ADICIONAR MAIS INFORMAÇÕES 
+        livro_usuario = Livros_Usuario(livro)
+        self.lista_livros.append(livro_usuario)
+        return livro_usuario
 
+    def adicionar_categoria(self,categoria):
+        categoria = Categoria(categoria)        
+        self.lista_categorias.append(categoria)
+        return categoria
 
+    def excluir_categoria(self,categoria):
+        #categoria = input("Digite a categoria que deseja excluir: ")
+        self.lista_categorias.remove(categoria)
 
-
-
-    def adicionar_categoria(self,lista_categorias,categoria):
-        categoria = Categoria_criada()
-        categoria.nome = input("Digite a categoria que deseja criar: ")
-        lista_categorias.append(categoria)
-
-    def excluir_categoria(self,lista_categorias,categoria):
-        categoria = input("Digite a categoria que deseja excluir: ")
-        lista_categorias.remove(categoria)
-
-
-
-
-
-class Catalogo:
-    def __init__(self):
-        self.lista_catalogo = [] # LISTA DE CLASSE LIVROS DIVERSOS 
-
-    def montar_catalogo(self,livros):
-        self.lista_catalogo.append(livros)
-
-    def ver_infos(self):
-        print("Livros no catálogo: ")
-        for i in self.lista_catalogo:
-            print(i)
-        
 
     
+
 
 
 # CADASTRO
@@ -191,10 +206,32 @@ if __name__ == "__main__":
    #print("--------------------------------------\n")
 
 
-    print("----------- Biblioteca Pessoal ----------\n")
+    print("----------- Biblioteca Pessoal ----------\n")  # categorias, etiqueta, nota, resenha
 
-    # categorias, etiqueta, nota, resenha
+    # exemplo de funcionalidade: adicionar 3 livros do catálogo no perfil
     montar_biblioteca = Biblioteca_Pessoal()
+    montar_biblioteca.adicionar_livro(livro6) 
+    montar_biblioteca.adicionar_livro(livro4) 
+    montar_biblioteca.adicionar_livro(livro1) 
 
+    # criando categorias
+
+    nova_categoria1 = montar_biblioteca.adicionar_categoria("Leituras Acadêmicas")
+    # como o metodo adicionar_livro retorna a subclasse (livro com mais especificações), armazena numa variavel pra poder utilizar novos atributos e métodos
+    livro5_usuario = nova_categoria1.adicionar_livro(livro5) 
+    livro5_usuario.adicionar_etiqueta("Segundo período EC")
+    nova_categoria1.printar_categoria()
+
+
+    nova_categoria_2 = montar_biblioteca.adicionar_categoria("Lidos 2026")
+    # como o metodo adicionar_livro retorna a subclasse (livro com mais especificações), armazena numa variavel pra poder utilizar novos atributos e métodos
+    livro1_usuario = nova_categoria_2.adicionar_livro(livro1)
+    
+    livro1_usuario.atribuir_nota("5/5")
+    livro1_usuario.data_inicio("30/03/2026")
+    livro1_usuario.data_final("01/04/2026")
+    livro1_usuario.ver_datas()
+
+    nova_categoria_2.printar_categoria()
     #print("--------------------------------------\n")
 
