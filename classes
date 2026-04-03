@@ -10,8 +10,6 @@
 #funcionalidade 10 - Incentivo de leitura via e-mail
 
 # CÓDIGO COM MENU PARA TESTE/SIMULAÇÃO DE FUNCIONALIDADES
-
-
 # BIBLIOTECA PARA MANIPULAÇÃO DE DATAS
 from datetime import datetime,timedelta
 
@@ -153,7 +151,16 @@ class Biblioteca_Pessoal:
         print("Livros na biblioteca: ")
         for i in self.lista_livros:
             print(i)
+
+    # mostra os livros que estão em cada categoria
+    def ver_pastas_conteudo(self):
+        print("Aqui está sua biblioteca: ")
+        for i in self.lista_categorias:
+            print(f"Categoria {i}: \n")
+            for j in i.livros_adicionados: 
+                print(f"Livro: {j}\n")
     
+
     def ver_categorias(self):
         print("Categorias: ")
         for i in self.lista_categorias:
@@ -335,7 +342,8 @@ if __name__ == "__main__":
 
                         minha_biblioteca.ver_infos()
                         livro = int(input("Digite o numero (1 a 6) do livro escolhido (BIBLIOTECA): \n"))   
-                        minha_biblioteca.ver_categorias()                     
+                        minha_biblioteca.ver_categorias() 
+                        minha_biblioteca.ver_pastas_conteudo()                    
                         categoria_add = int(input("Digite o índice da categoria que deseja adicionar o livro: \n"))
 
                         livro_escolhido = minha_biblioteca.lista_livros[livro - 1]
