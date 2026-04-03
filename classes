@@ -11,6 +11,7 @@
 
 # CÓDIGO COM MENU PARA TESTE/SIMULAÇÃO DE FUNCIONALIDADES
 
+
 # BIBLIOTECA PARA MANIPULAÇÃO DE DATAS
 from datetime import datetime,timedelta
 
@@ -287,10 +288,11 @@ if __name__ == "__main__":
                    
                    #ETIQUETA
                     if opcao_interna == 1:
-                        livro = int(input("Digite o numero (1 a 6) do livro escolhido: \n"))
+                        minha_biblioteca.ver_infos()
+                        livro = int(input("Digite o numero (1 a 6) do livro escolhido (BIBLIOTECA): \n"))
                         etiqueta_add = input("Digite sua nova etiqueta: \n" )
 
-                        if livro > 6:
+                        if livro > len(minha_biblioteca.lista_livros):
                             print("Livro não encontrado.")
                             break
                         livro_escolhido = minha_biblioteca.lista_livros[livro - 1]
@@ -298,10 +300,11 @@ if __name__ == "__main__":
 
                     #AVALIAÇÃO
                     elif opcao_interna == 2:
-                        livro = int(input("Digite o numero (1 a 6) do livro escolhido: \n"))
+                        minha_biblioteca.ver_infos()
+                        livro = int(input("Digite o numero (1 a 6) do livro escolhido (BIBLIOTECA): \n"))                        
                         nota_add = float(input("Digite sua avaliação: \n"))
 
-                        if livro > 6:
+                        if livro > len(minha_biblioteca.lista_livros):
                             print("Livro não encontrado.")
                             break
 
@@ -310,10 +313,11 @@ if __name__ == "__main__":
                                               
                     #RESENHA
                     elif opcao_interna == 3:
-                        livro = int(input("Digite o numero (1 a 6) do livro escolhido: \n"))
+                        minha_biblioteca.ver_infos()
+                        livro = int(input("Digite o numero (1 a 6) do livro escolhido (BIBLIOTECA): \n"))                         
                         resenha_add = input("Digite sua resenha literária: \n")
 
-                        if livro > 6:
+                        if livro > len(minha_biblioteca.lista_livros):
                             print("Livro não encontrado.")
                             break
 
@@ -328,7 +332,10 @@ if __name__ == "__main__":
 
                     #PREENCHER CATEGORIA
                     elif opcao_interna == 5:
-                        livro = int(input("Digite o numero (1 a 6) do livro escolhido: \n"))
+
+                        minha_biblioteca.ver_infos()
+                        livro = int(input("Digite o numero (1 a 6) do livro escolhido (BIBLIOTECA): \n"))   
+                        minha_biblioteca.ver_categorias()                     
                         categoria_add = int(input("Digite o índice da categoria que deseja adicionar o livro: \n"))
 
                         livro_escolhido = minha_biblioteca.lista_livros[livro - 1]
@@ -339,10 +346,11 @@ if __name__ == "__main__":
 
                     #DATA DE INICIO
                     elif opcao_interna == 6:
-                        livro = int(input("Digite o numero (1 a 6) do livro escolhido: \n"))
+                        minha_biblioteca.ver_infos()
+                        livro = int(input("Digite o numero (1 a 6) do livro escolhido (BIBLIOTECA): \n"))   
                         data_add = input("Digite a data de início de leitura no formato DD/MM/YYYY")
 
-                        if livro > 6:
+                        if livro > len(minha_biblioteca.lista_livros):
                             print("Livro não encontrado.")
                             break
 
@@ -351,10 +359,11 @@ if __name__ == "__main__":
 
                     #DATA DE FIM
                     elif opcao_interna == 7:
-                        livro = int(input("Digite o numero (1 a 6) do livro escolhido: \n"))
+                        minha_biblioteca.ver_infos()
+                        livro = int(input("Digite o numero (1 a 6) do livro escolhido (BIBLIOTECA): \n"))                           
                         data_add = input("Digite a data de fim de leitura no formato DD/MM/YYYY: ")
 
-                        if livro > 6:
+                        if livro > len(minha_biblioteca.lista_livros):
                             print("Livro não encontrado.")
                             break
 
