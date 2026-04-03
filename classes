@@ -156,7 +156,7 @@ class Biblioteca_Pessoal:
     def ver_pastas_conteudo(self):
         print("Aqui está sua biblioteca: ")
         for i in self.lista_categorias:
-            print(f"Categoria {i}: \n")
+            print(f"Categoria {i}: ")
             for j in i.livros_adicionados: 
                 print(f"Livro: {j}\n")
     
@@ -283,13 +283,14 @@ if __name__ == "__main__":
                 print("----------- Biblioteca Pessoal ----------\n")  # categorias, etiqueta, nota, resenha
                 # CHECAR SE ALGUM LIVRO FOI ADICIONADO NA BIBLIOTECA
                 if not minha_biblioteca.lista_livros:
+                    print("Aviso: Para conseguir utilizar as funcionalidades em um livro, adicione-o em sua biblioteca primeiro =)\n")
                     print("Nenhum livro foi adicionado ainda.\n")
                     break
                 else:
                     minha_biblioteca.ver_infos()
                     print("\n")
                     print("Selecione o que deseja fazer: \n")
-                    print("Aviso: Para conseguir utilizar as funcionalidades em um livro, adicione-o em sua biblioteca primeiro =)\n")
+                    #print("Aviso: Para conseguir utilizar as funcionalidades em um livro, adicione-o em sua biblioteca primeiro =)\n")
 
                     opcao_interna = float(input("Opção 1 - Adicionar etiqueta em um livro\nOpção 2 - Adicionar avaliação em um livro\nOpção 3 - Adicionar resenha literária em um livro\nOpção 4 - Criar categoria\nOpção 5 - Preencher categoria\nOpção 6 - Add data de início\nOpção 7 - Add data finalização\nOpção 8 - Ver informações da biblioteca pessoal\nOpção 9 - Ver retrospectiva anual\nOpção 10 - Definir meta de leitura\nOpção 11 - Voltar para o menu\n"))
                    
@@ -343,7 +344,6 @@ if __name__ == "__main__":
                         minha_biblioteca.ver_infos()
                         livro = int(input("Digite o numero (1 a 6) do livro escolhido (BIBLIOTECA): \n"))   
                         minha_biblioteca.ver_categorias() 
-                        minha_biblioteca.ver_pastas_conteudo()                    
                         categoria_add = int(input("Digite o índice da categoria que deseja adicionar o livro: \n"))
 
                         livro_escolhido = minha_biblioteca.lista_livros[livro - 1]
@@ -351,6 +351,7 @@ if __name__ == "__main__":
                         
                         categoria_escolhida.adicionar_livro(livro_escolhido)
                         categoria_escolhida.printar_categoria()
+                        minha_biblioteca.ver_pastas_conteudo()                    
 
                     #DATA DE INICIO
                     elif opcao_interna == 6:
