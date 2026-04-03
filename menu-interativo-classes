@@ -10,8 +10,16 @@
 #funcionalidade 10 - Incentivo de leitura via e-mail
 
 # CÓDIGO COM MENU PARA TESTE/SIMULAÇÃO DE FUNCIONALIDADES
+
+# ESCONDER SENHA
+import getpass
+
+# CRIAÇÃO DE VENV PRA UTILIZAR BIBLIOTECA DE PROTEÇÃO DE SENHAS
+from argon2 import PasswordHasher
+
 # BIBLIOTECA PARA MANIPULAÇÃO DE DATAS
 from datetime import datetime,timedelta
+
 
 # SUPER CLASSE LIVRO -> PRESENTE NO CATÁLOGO DO MENU
 class Livro:
@@ -189,15 +197,17 @@ class Usuario:
     def __init__(self, nome,email,senha):
         self.nome = nome
         self.email = email
-        self.__senha = senha #dois underlines para proteger o dado sigiloso
-        self.biblioteca_pessoal = []
-        self.ultimo_acesso = None
+        self.__senha = senha # dois underlines para proteger o dado sigiloso do acesso em outras classes
+        self.ph = PasswordHasher() # para que os metodos (login) possam acessar
+        self.__senha = self.ph.hash(senha) # criptografar a senha
 
 
     def login(self,email_dado,senha_dada):
-        if self.email == email_dado and self.__senha == senha_dada:
+        if self.email == email_dado and self.ph.verify(self.__senha,senha_dada):
+
             self.ultimo_acesso = datetime.now()
             print("Login realizado!\n")
+
             print("Último acesso:",self.ultimo_acesso)
             return True 
         else:
@@ -241,13 +251,13 @@ if __name__ == "__main__":
     print("Seja bem-vindo(a) a sua estante! Para fazer o cadastro, utilize seu e-mail e defina seu nome de usuário e senha.\n")
     input_usuario = input("Digite seu nome de usuario: \n")
     input_email = input("Digite seu e-mail: \n")
-    input_senha = input("Crie sua senha: \n")  # falta mascarar a senha
+    input_senha = getpass.getpass("Crie sua senha: \n")  
 
     usuario = Usuario(input_usuario,input_email,input_senha)
 
     print("Agora faça seu login para acessar as funcionalidades.\n")
     login_email = input("Digite seu e-mail: \n")
-    login_senha = input("Digite sua senha: \n")  # falta mascarar a senha
+    login_senha = getpass.getpass("Digite sua senha: \n")  # falta mascarar a senha coom *
 
     checagem = usuario.login(login_email,login_senha)
 
@@ -396,5 +406,7 @@ if __name__ == "__main__":
                             print("Livro não encontrado.")
                             break
 
+                        livro_escolhido = minha_biblioteca.lista_livros[livro - 1]
+                        minha_biblioteca.definir_meta(livro_escolhido)
                         livro_escolhido = minha_biblioteca.lista_livros[livro - 1]
                         minha_biblioteca.definir_meta(livro_escolhido)
