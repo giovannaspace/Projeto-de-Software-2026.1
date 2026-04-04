@@ -408,5 +408,4 @@ if __name__ == "__main__":
 
                         livro_escolhido = minha_biblioteca.lista_livros[livro - 1]
                         minha_biblioteca.definir_meta(livro_escolhido)
-                        livro_escolhido = minha_biblioteca.lista_livros[livro - 1]
-                        minha_biblioteca.definir_meta(livro_escolhido)
+]
