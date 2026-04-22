@@ -72,10 +72,6 @@ class Leitura(ABC):
     def progresso_leitura(self,numero):
         pass
     
-   # @abstractmethod
-   # def calcular_porcentagem(self):
-       # pass
-
 
     def __str__(self):
         infos_classe_composicao = self.livro.__str__() # reaproveitando 
