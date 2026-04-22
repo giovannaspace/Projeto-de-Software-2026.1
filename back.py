@@ -72,7 +72,7 @@ class Leitura(ABC):
     def progresso_leitura(self,numero):
         pass
     
-
+    @abstractmethod
     def __str__(self):
         infos_classe_composicao = self.livro.__str__() # reaproveitando 
         return f"{infos_classe_composicao}, ETIQUETA: {self.etiqueta}, NOTA: {self.nota}, RESENHA: {self.resenha}, DATA INÍCIO: {self.inicio_leitura}, DATA FINAL: {self.final_leitura}"
@@ -162,6 +162,7 @@ class Categoria:
         self.leituras_adicionadas = []
       
     # RECEBE O OBJETO LEITURA (QUE SERA LIVRO FISICO OU AUDIOBOOK)
+    # composição 
     def adicionar_leitura(self, livro):
         self.leituras_adicionadas.append(livro)
         return livro
@@ -207,6 +208,7 @@ class Biblioteca_Pessoal:
         # leitura.livro -> objeto Livro dentro dele por composição
         return sorted(self.lista_leituras, key=lambda leitura: leitura.livro.titulo)
 
+    # composição (lista de objetos Categoria)
     def adicionar_categoria(self,categoria):
         categoria = Categoria(categoria)        
         self.lista_categorias.append(categoria)
