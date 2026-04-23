@@ -102,7 +102,7 @@ class LivroFisico_Ebook(Leitura):
             print(f"Progresso atualizado: {self.pagina_atual}/{self.total_paginas} ({porcentagem:.1f}%)")
 
             if self.pagina_atual >= self.total_paginas:
-                print("Livro concluído!")  
+                console.print("[bold purple]Livro concluído![/bold purple]")  
 
             return porcentagem 
 
@@ -146,13 +146,10 @@ class Audiobook(Leitura):
             print(f"Tempo ouvido: {tempo} de {self.tempo_total}") 
             
             if self.tempo_ouvido >= self.tempo_total:
-                print("Audiobook concluído!")  
+                console.print("[bold purple]Audiobook concluído![/bold purple]")  
                  
             return porcentagem
 
-    def retornar_menu(self):
-        return "audiobook"
-    
 
     def avaliar_narracao(self,nota):
         self.nota_narracao = nota
