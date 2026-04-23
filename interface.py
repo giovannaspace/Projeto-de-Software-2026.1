@@ -388,7 +388,7 @@ def cadastro_login(catalogo):
 
                     elif opcao_biblioteca == 8:
                         console.print(biblioteca_usuario)
-                        num = IntPrompt.ask("[bold]Digite o número do livro desejado para ver/adicionar informações.[/bold]")
+                        num = IntPrompt.ask("[bold]Digite o número do livro desejado para adicionar informações.[/bold]")
                         
                         if num < 1 or num > len(minha_biblioteca.lista_leituras):
                             console.print("[bold red]Livro não encontrado.[/bold red]")
@@ -457,30 +457,17 @@ def cadastro_login(catalogo):
                             # OPÇÕES ESPECÍFICAS PARA CADA TIPO
 
                             elif opcao_desejada == 6:
-                                if isinstance(livro_escolhido,LivroFisico_Ebook):
-                                    pag_informada = IntPrompt.ask("[bold]Informe a página atual:[/bold]")
-                                    porcentagem = livro_escolhido.progresso_leitura(pag_informada)
+                                porcentagem = livro_escolhido.progresso_leitura()
 
-                                    barra = ProgressBar(total=100, completed=porcentagem, width=40, pulse=False)
+                                barra = ProgressBar(total=100, completed=porcentagem, width=40, pulse=False)
 
-                                    console.print(barra)
-                                    console.print("\n")
+                                console.print(barra)
+                                console.print("\n")
 
-                                    console.print("[bold green]Página atualizada![/bold green]")
-                                    biblioteca_usuario = atualizar_tabela_usuario()
-                                    console.print(biblioteca_usuario)
+                                biblioteca_usuario = atualizar_tabela_usuario()
+                                console.print(biblioteca_usuario)
                                     
-                                else:
-                                    tempo_informado = Prompt.ask("[bold]Informe a timestamp atual (HH:MM:SS):[/bold]")
-                                    porcentagem = livro_escolhido.progresso_leitura(tempo_informado)
-                                    
-                                    barra = ProgressBar(total=100, completed=porcentagem, width=40, pulse=False)
-                                    console.print(barra)
-                                    console.print("\n")
-
-                                    console.print("[bold green]Timestamp atualizada![/bold green]")
-                                    biblioteca_usuario = atualizar_tabela_usuario()
-                                    console.print(biblioteca_usuario)
+                    
 
                             elif opcao_desejada == 7:
                                 if isinstance(livro_escolhido,LivroFisico_Ebook):

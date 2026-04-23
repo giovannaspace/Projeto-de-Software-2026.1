@@ -9,6 +9,10 @@ from argon2 import PasswordHasher
 # BIBLIOTECA PARA MANIPULAÇÃO DE DATAS
 from datetime import datetime,timedelta
 
+from rich.prompt import Prompt, IntPrompt
+from rich.console import Console
+console = Console()
+
 
 class Livro:
     def __init__(self,numero,titulo,autor,sinopse):
@@ -66,13 +70,12 @@ class Leitura(ABC):
         self.final_leitura = datetime.strptime(self.final_leitura, "%d/%m/%Y").date() # retornar apenas data, sem a hora
     
 
-# metodos abstratos (cada subclasse vai implementar com suas diferenças)
+# metodo abstrato (cada subclasse vai implementar com suas diferenças)
 
     @abstractmethod
     def progresso_leitura(self,numero):
         pass
-    
-    @abstractmethod
+
     def __str__(self):
         infos_classe_composicao = self.livro.__str__() # reaproveitando 
         return f"{infos_classe_composicao}, ETIQUETA: {self.etiqueta}, NOTA: {self.nota}, RESENHA: {self.resenha}, DATA INÍCIO: {self.inicio_leitura}, DATA FINAL: {self.final_leitura}"
@@ -88,19 +91,20 @@ class LivroFisico_Ebook(Leitura):
         self.emprestado_para = emprestado_para
 
 
-    def progresso_leitura(self,pagina):
+    def progresso_leitura(self):
+        pagina = IntPrompt.ask("[bold]Informe a página atual:[/bold]")
+
         if pagina > 0 and pagina <= self.total_paginas: # checar se é valido
             self.pagina_atual = pagina
             porcentagem = (self.pagina_atual/self.total_paginas) * 100
 
+            console.print("[bold green]Página atualizada![/bold green]")
             print(f"Progresso atualizado: {self.pagina_atual}/{self.total_paginas} ({porcentagem:.1f}%)")
 
             if self.pagina_atual >= self.total_paginas:
-                self.finalizar_leitura()     
                 print("Livro concluído!")  
 
             return porcentagem 
-
 
     def emprestar(self,pessoa):
         self.emprestado_para = pessoa
@@ -127,7 +131,9 @@ class Audiobook(Leitura):
         self.tempo_total = (duracao_convertida.hour * 3600) + (duracao_convertida.minute * 60) + duracao_convertida.second
 
 
-    def progresso_leitura(self,tempo):
+    def progresso_leitura(self):
+
+        tempo = Prompt.ask("[bold]Informe a timestamp atual (HH:MM:SS):[/bold]")
         tempo_convertido = datetime.strptime(tempo, "%H:%M:%S")
         segundos_totais = (tempo_convertido.hour * 3600) + (tempo_convertido.minute * 60) + tempo_convertido.second
 
@@ -135,14 +141,18 @@ class Audiobook(Leitura):
             self.tempo_ouvido = segundos_totais
             porcentagem = (self.tempo_ouvido/self.tempo_total) * 100
 
-            print(f"Progresso atualizado: {porcentagem:.1f}%)")
+            console.print("[bold green]Timestamp atualizada![/bold green]")
+            print(f"Progresso atualizado: ({porcentagem:.1f}%)")
             print(f"Tempo ouvido: {tempo} de {self.tempo_total}") 
             
             if self.tempo_ouvido >= self.tempo_total:
-                self.finalizar_leitura()
                 print("Audiobook concluído!")  
                  
             return porcentagem
+
+    def retornar_menu(self):
+        return "audiobook"
+    
 
     def avaliar_narracao(self,nota):
         self.nota_narracao = nota
