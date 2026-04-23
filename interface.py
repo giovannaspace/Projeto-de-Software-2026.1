@@ -472,7 +472,7 @@ def cadastro_login(catalogo):
                             elif opcao_desejada == 7:
                                 if isinstance(livro_escolhido,LivroFisico_Ebook):
                                     emprestimo_pessoa = Prompt.ask("[bold]Informe para quem você emprestou o livro:[/bold]")
-                                    livro_escolhido.emprestar(emprestimo_pessoa) # Chamando o método da classe
+                                    livro_escolhido.emprestar(emprestimo_pessoa) 
                                     console.print(f"[bold green]Empréstimo registrado para {emprestimo_pessoa}![/bold green]")
                                     biblioteca_usuario = atualizar_tabela_usuario()
                                     console.print(biblioteca_usuario)
