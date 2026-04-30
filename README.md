@@ -4,6 +4,7 @@
 Repositório para a disciplina de Projeto de Software  
 Engenharia de computação - UFAL  
 ---
+1. `git clone <url do repositório>`  
 
 O banco de dados para a primeira parte do projeto começou a ser implementado para cadastro e login, pelo uso do **PostgreSQL** e hospedagem no **NeonConsole**. Para ter acesso à tabela gerada:
 1. Acesse: [Neon Console](https://console.neon.tech/) e crie uma conta gratuitamente; 
@@ -23,10 +24,9 @@ DATABASE_URL=url_criada_do_neon
 ```
 
 **Após configurar os passos acima, execute:**  
-1. `git clone <url do repositório>`  
-2. `python -m venv venv`  
-3.  - WSL/Linux/Mac -> `source venv/bin/activate`  
+1. `python -m venv venv`  
+2.  - WSL/Linux/Mac -> `source venv/bin/activate`  
     - Windows -> `venv\Scripts\activate`  
 
-4.`pip install -r requirements.txt`  
-5.`python main.py`  
+3.`pip install -r requirements.txt`  
+4.`python main.py`  
