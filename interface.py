@@ -147,14 +147,14 @@ def cadastro_login(catalogo):
 
         if logado:
             # quando foi o ultimo acesso
-            #acesso_anterior = comparar_ultimo_acesso_bd(usuario.email)
+            acesso_anterior = comparar_ultimo_acesso_bd(usuario.email)
             # atualiza novo acesso
             data_visivel = ultimo_acesso_bd(usuario) 
  
- # COMENTADO PARA PODER TESTAR 
-            #if acesso_anterior: # saber se é o primeiro acesso ou nao
-              #  usuario.ultimo_acesso = acesso_anterior   # guarda a data    
-               # usuario.verificar_inatividade() # decide o envio do email   
+ # COMENTAR CASO USE O TESTE DE INATIVIDADE  
+            if acesso_anterior: # saber se é o primeiro acesso ou nao
+                usuario.ultimo_acesso = acesso_anterior   # guarda a data    
+                usuario.verificar_inatividade() # decide o envio do email   
 
 
             console.print(f"[bold green]Bem-vindo, {usuario.nome}![/]")
@@ -162,8 +162,8 @@ def cadastro_login(catalogo):
 
 
             # teste de inatividade!! colocar acesso > 30 dias para receber o email
-            usuario.ultimo_acesso = datetime.now() - timedelta(days=31)
-            usuario.verificar_inatividade()
+            #usuario.ultimo_acesso = datetime.now() - timedelta(days=31)
+            #usuario.verificar_inatividade()
            
             while True:
                 console.print(f"[bold]Você deseja navegar pelo catálogo de livros ou visitar sua biblioteca pessoal?[/bold]")

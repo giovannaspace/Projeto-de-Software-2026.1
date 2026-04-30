@@ -43,7 +43,7 @@ def ultimo_acesso_bd(usuario):
 
 # antes de sobrescrever, compara o ultimo acesso armazenado
 def comparar_ultimo_acesso_bd(string_email):
-    cursor.execute("""SELECT ultimo_acesso FROM perfis_usuarios WHERE email_usuario = %s"""), (string_email)
+    cursor.execute("""SELECT ultimo_acesso FROM perfis_usuarios WHERE email_usuario = %s""", (string_email,))  # string_email com virgula pois é uma tupla (para consulta)
     resultado = cursor.fetchone()
     # se o email existe (nao for None) e o ultimo acesso existir (ultimo acesso é o elemento da tupla (de um elemento) retornada por fetchone)
     if resultado and resultado[0]:
