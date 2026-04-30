@@ -26,7 +26,7 @@ DATABASE_URL=url_criada_do_neon
 1. `git clone <url do repositório>`  
 2. `python -m venv venv`  
 3.  - WSL/Linux/Mac -> `source venv/bin/activate`  
-    - Windows -> `venv\Scripts\activate`
+    - Windows -> `venv\Scripts\activate`  
 
 4.`pip install -r requirements.txt`  
-5.`python main.py`
+5.`python main.py`  
