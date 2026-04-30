@@ -30,3 +30,5 @@ DATABASE_URL=url_criada_do_neon
 
 3.`pip install -r requirements.txt`  
 4.`python main.py`  
+
+## Descrição das funcionalidades (em andamento...)
