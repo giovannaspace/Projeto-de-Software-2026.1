@@ -16,8 +16,10 @@ def enviar_email(destinatario):
     Olá, notamos que você não fez login nos últimos 30 dias. 
     Volte para o My Bookshelf e atualize suas metas literárias!
     """
-    anexo = '/home/giovanna/PDS/segunda_versao/email-projeto.png'
-
+    #anexo = '/home/giovanna/PDS/segunda_versao/email-projeto.png'
+    # guarda caminho do arquivo:
+    anexo = os.path.join(os.path.dirname(__file__), 'email-projeto.png')
+    
     #criar email
     msg = EmailMessage()
     msg['From'] = remetente
