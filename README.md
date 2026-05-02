@@ -109,7 +109,12 @@ class LivroFisico_Ebook(Leitura):
 class Audiobook(Leitura):
 (...)
 ```
+
 - Nesse sistema, o livro disponibilizado no catálogo é da `class Livro` e possui a base de atributos (passados por composição), como título, autor(a) e sinopse. Ao adicionar o livro na biblioteca, ele ganha acesso a mais atributos e métodos que estarão visíveis apenas para o usuário. Esses livros salvos pelo usuário serão da `class LivroFisico_Ebook` ou da `class Audiobook` e são subclasses da superclasse `Leitura` (que é abstrata, não instanciada diretamente) pela necessidade de compartilhar as mesmas funcionalidades, porém, pela natureza distinta de cada forma de leitura, também possuem seu método específico (`emprestar()` e `avaliar_narracao()`) e implementação distinta do método abstrato `progresso_leitura()` declarado em `Leitura`.
+- Métodos concretos herdados pelas subclasses: `adicionar_etiqueta()`,`atribuir_nota()`,`escrever_resenha()`,`data_inicio()`,`data_final()`
+- Método abstrato herdado pelas subclasses: `progresso_leitura()`
+
+
 
 ### Polimorfismo
 Método abstrato:
@@ -127,5 +132,6 @@ Chamada do método:
     livro_escolhido = minha_biblioteca.lista_leituras[num-1]
     porcentagem = livro_escolhido.progresso_leitura()
 ```
-- O polimorfismo acontece quando o usuário seleciona a opção de ver o progresso de leitura para o livro selecionado. Antes disso, no momento em que ele especifica o tipo de leitura ao adicionar na biblioteca, o sistema irá pedir a duração total (Audiobook) ou o total de páginas (LivroFisico_Ebook) e para cada caso, o método irá ser implementado de forma distinta, um precisará passar pela conversão de tempo usando a biblioteca `datetime` e o outro poderá calcular a porcentagem diretamente. Ambos também informam quando a leitura estiver marcada como 100% concluída.
+- O polimorfismo acontece quando o usuário seleciona a opção de ver o progresso de leitura para o livro selecionado. Antes disso, no momento em que ele especifica o tipo de leitura ao adicionar na biblioteca, o sistema irá pedir a duração total (Audiobook) ou o total de páginas (LivroFisico_Ebook) e armazenar. Para cada caso, o método será implementado de forma distinta ao ser chamado. Um precisará passar pela conversão de tempo usando a biblioteca `datetime` e o outro poderá calcular a porcentagem diretamente. Ambos também informam quando a leitura estiver marcada como 100% concluída.
 - O objeto (livro selecionado pelo índice) é armazenado em `livro_escolhido` e o método `progresso_leitura` é acionado sem distinção na hora da chamada. O tratamento diferente ocorrerá apenas dentro das determinadas classes.
+
