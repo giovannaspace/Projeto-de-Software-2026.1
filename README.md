@@ -92,9 +92,9 @@ DATABASE_URL=url_criada_do_neon
 - Visualização de leituras concluídas no ano informado pelo usuário.
 
 12. Acompanhar progresso de leitura;  
--   ``` 
+- ```python
     class LivroFisico_Ebook(Leitura)
-    class Audiobook(Leitura)
+    class Audiobook(Leitura) 
     ```
     (back.py)
 - Barra de progressão de leitura (porcentagem atualizada) adaptada para o tipo de leitura cadastrada. Usuário informa timestamp (audiobook) ou página atual (livro físico/ebook).
